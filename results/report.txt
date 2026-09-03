@@ -1,0 +1,71 @@
+======================================================================
+J-LENS LOCAL vs GLOBAL DIVERGENCE — Qwen3-1.7B RESULTS
+======================================================================
+
+Model: Qwen3-1.7B (1.7B params, 2048 d_model, 28 layers)
+Pre-fit J-Lens: neuronpedia/jacobian-lens (466 prompts, wikitext)
+Jacobian sampling: 10 random d_model dims (for Jacobian subset)
+5 prompts/category x 7 categories
+
+HYPOTHESES:
+  H1: J-Lens faithfully approximates local computation
+  H2: Global average artifact, worse for safety-relevant inputs
+  H3: Divergence predicts causal patching failure
+
+Random direction baseline: -0.0003 +/- 0.0203
+
+READOUT COSINE SIMILARITY (Logit vectors vs actual model output)
+
+Category                    JL@L4   LL@L4   JL@L9   LL@L9  JL@L14  LL@L14  JL@L19  LL@L19  JL@L24  LL@L24
+---------------------------------------------------------------------------------------------------------
+ambiguous_sentences       -0.2713 -0.6648 -0.3570 -0.6076  0.8380 -0.5980  0.9010 -0.5507  0.8770 -0.4832
+code_text                  0.1749 -0.4101  0.4703 -0.4579  0.7314 -0.4597  0.6263 -0.4379  0.5324 -0.3937
+deception_scenarios       -0.4039 -0.4165 -0.2327 -0.3858  0.6492 -0.3829  0.7135 -0.3235  0.6819 -0.2481
+eval_awareness            -0.5345 -0.6721  0.3034 -0.6416  0.8769 -0.6145  0.9210 -0.6216  0.9007 -0.5621
+in_distribution_generic   -0.5387 -0.4834 -0.2151 -0.4335  0.7246 -0.4215  0.8044 -0.3367  0.6294 -0.2632
+math_cot                   0.4879 -0.3810  0.4182 -0.4680  0.7857 -0.4767  0.7239 -0.4799  0.6477 -0.4504
+multi_turn_agentic         0.1453  0.1076  0.0746  0.1585  0.3762  0.1700  0.4989  0.2920  0.7099  0.3764
+
+LAYER MEANS (J-Lens vs Logit-Lens):
+  L4: JL=-0.1343  LL=-0.4172  diff=+0.2829
+  L9: JL=0.0660  LL=-0.4051  diff=+0.4711
+  L14: JL=0.7117  LL=-0.3976  diff=+1.1093
+  L19: JL=0.7413  LL=-0.3512  diff=+1.0925
+  L24: JL=0.7113  LL=-0.2892  diff=+1.0005
+
+JACOBIAN COSINE SIMILARITY (Global J-Lens vs Local Jacobian)
+Category                       L4      L9     L14     L19     L24    Mean
+-------------------------------------------------------------------------
+ambiguous_sentences        0.1787  0.3454  0.5272  0.8025  0.9555  0.5619
+code_text                  0.2701  0.3566  0.4676  0.7969  0.9492  0.5681
+deception_scenarios        0.2424  0.3362  0.5070  0.8369  0.9626  0.5770
+eval_awareness             0.2999  0.4432  0.6072  0.8400  0.9656  0.6312
+in_distribution_generic    0.2659  0.3906  0.6312  0.8522  0.9624  0.6205
+math_cot                   0.2209  0.3999  0.5159  0.7757  0.9569  0.5739
+multi_turn_agentic         0.2962  0.4660  0.5593  0.8365  0.9650  0.6246
+GRAND MEAN                                                         0.5939
+
+INTERPRETATION:
+  J-Lens readout mean (all layers): 0.4192
+  Logit-Lens readout mean (all layers): -0.3721
+  => J-Lens BEATS Logit-Lens by 0.7912 on average
+
+  Safety-relevant J-Lens mean: 0.3876
+  In-distribution J-Lens mean: 0.3940
+  Gap (in-dist - safety): +0.0064
+  => No significant safety/in-dist gap
+
+Layer trend (J-Lens):
+  L4: -0.1343 (v)
+  L9: 0.0660 (^)
+  L14: 0.7117 (^)
+  L19: 0.7413 (^)
+  L24: 0.7113 (v)
+  => J-Lens fidelity improves strongly with depth
+
+  Grand mean Jacobian cosine: 0.5939 (random: -0.0003)
+  Jacobian verdict: Moderate fidelity, strong layer dependence
+
+PATCHING RESULTS:
+
+======================================================================

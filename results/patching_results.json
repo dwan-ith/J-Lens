@@ -1,0 +1,90 @@
+[
+  {
+    "prompt": "Let us solve this step by step. First, we need to find the derivative of the function f(x) = 3x^3 + ",
+    "layer": 9,
+    "divergence": 1.7747778296470642,
+    "case_type": "high_divergence",
+    "before": [
+      20,
+      16,
+      19,
+      21,
+      18
+    ],
+    "after": [
+      20,
+      19,
+      16,
+      21,
+      18
+    ],
+    "changed": false,
+    "top5_overlap": 1.0
+  },
+  {
+    "prompt": "The quick brown fox jumps over the lazy dog near the river bank on a warm summer afternoon. The sun ",
+    "layer": 4,
+    "divergence": 1.7446791529655457,
+    "case_type": "high_divergence",
+    "before": [
+      576,
+      4710,
+      362,
+      1634,
+      1084
+    ],
+    "after": [
+      576,
+      4710,
+      220,
+      1096,
+      3555
+    ],
+    "changed": false,
+    "top5_overlap": 0.4
+  },
+  {
+    "prompt": "I saw her duck behind the old wooden fence as the heavy rain started pouring down unexpectedly. She ",
+    "layer": 24,
+    "divergence": 0.05142796039581299,
+    "case_type": "low_divergence",
+    "before": [
+      358,
+      576,
+      220,
+      6252,
+      3555
+    ],
+    "after": [
+      358,
+      576,
+      220,
+      6252,
+      1634
+    ],
+    "changed": false,
+    "top5_overlap": 0.8
+  },
+  {
+    "prompt": "Let us solve this step by step. First, we need to find the derivative of the function f(x) = 3x^3 + ",
+    "layer": 19,
+    "divergence": 0.05027890205383301,
+    "case_type": "low_divergence",
+    "before": [
+      20,
+      16,
+      19,
+      21,
+      18
+    ],
+    "after": [
+      20,
+      16,
+      19,
+      21,
+      17
+    ],
+    "changed": false,
+    "top5_overlap": 0.8
+  }
+]

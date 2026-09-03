@@ -1,0 +1,130 @@
+{
+  "eval_awareness": {
+    "4": {
+      "jl_raw": -0.0591,
+      "ll_raw": -0.0588,
+      "advantage": -0.0003
+    },
+    "9": {
+      "jl_raw": 0.3971,
+      "ll_raw": -0.0004,
+      "advantage": 0.3975
+    },
+    "14": {
+      "jl_raw": 0.5154,
+      "ll_raw": 0.0589,
+      "advantage": 0.4566
+    },
+    "19": {
+      "jl_raw": 0.5627,
+      "ll_raw": 0.2102,
+      "advantage": 0.3525
+    },
+    "24": {
+      "jl_raw": 0.7066,
+      "ll_raw": 0.2654,
+      "advantage": 0.4412
+    },
+    "26": {
+      "jl_raw": 0.634,
+      "ll_raw": 0.3488,
+      "advantage": 0.2852
+    }
+  },
+  "math_cot": {
+    "4": {
+      "jl_raw": -0.5243,
+      "ll_raw": -0.2093,
+      "advantage": -0.3149
+    },
+    "9": {
+      "jl_raw": 0.3827,
+      "ll_raw": -0.2689,
+      "advantage": 0.6516
+    },
+    "14": {
+      "jl_raw": 0.7185,
+      "ll_raw": -0.366,
+      "advantage": 1.0844
+    },
+    "19": {
+      "jl_raw": 0.7307,
+      "ll_raw": -0.1287,
+      "advantage": 0.8593
+    },
+    "24": {
+      "jl_raw": 0.6627,
+      "ll_raw": 0.0498,
+      "advantage": 0.6129
+    },
+    "26": {
+      "jl_raw": 0.4185,
+      "ll_raw": 0.1372,
+      "advantage": 0.2814
+    }
+  },
+  "deception_scenarios": {
+    "4": {
+      "jl_raw": -0.4177,
+      "ll_raw": -0.2065,
+      "advantage": -0.2112
+    },
+    "9": {
+      "jl_raw": -0.0328,
+      "ll_raw": -0.2973,
+      "advantage": 0.2645
+    },
+    "14": {
+      "jl_raw": 0.6186,
+      "ll_raw": -0.3256,
+      "advantage": 0.9442
+    },
+    "19": {
+      "jl_raw": 0.7035,
+      "ll_raw": -0.1775,
+      "advantage": 0.881
+    },
+    "24": {
+      "jl_raw": 0.6471,
+      "ll_raw": 0.0539,
+      "advantage": 0.5933
+    },
+    "26": {
+      "jl_raw": 0.3436,
+      "ll_raw": 0.1817,
+      "advantage": 0.1618
+    }
+  },
+  "multi_turn_agentic": {
+    "4": {
+      "jl_raw": -0.3771,
+      "ll_raw": -0.2674,
+      "advantage": -0.1096
+    },
+    "9": {
+      "jl_raw": 0.059,
+      "ll_raw": -0.2096,
+      "advantage": 0.2687
+    },
+    "14": {
+      "jl_raw": 0.6413,
+      "ll_raw": -0.2678,
+      "advantage": 0.9091
+    },
+    "19": {
+      "jl_raw": 0.7362,
+      "ll_raw": -0.031,
+      "advantage": 0.7672
+    },
+    "24": {
+      "jl_raw": 0.703,
+      "ll_raw": 0.165,
+      "advantage": 0.538
+    },
+    "26": {
+      "jl_raw": 0.5088,
+      "ll_raw": 0.2166,
+      "advantage": 0.2922
+    }
+  }
+}
