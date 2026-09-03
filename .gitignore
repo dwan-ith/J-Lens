@@ -4,17 +4,3 @@ lens_weights/
 *.pt
 *.log
 __pycache__/
-COLAB_INSTRUCTIONS.md
-*.ipynb
-debug_*.py
-debug_*.py
-debug_*.py
-causal_patching*.py
-check_*.py
-compute_*.py
-fix_*.py
-generate_*.py
-get_*.py
-plot_*.py
-random_*.py
-run_*.py
