@@ -7,12 +7,12 @@ import numpy as np
 import transformers
 import json
 
-sys.path.insert(0, r"C:\Users\aacer\Desktop\MATS\jacobian-lens")
+sys.path.insert(0, r"C:\Users\aacer\Documents\J-Space\jacobian-lens")
 import jlens
 from jlens.hooks import ActivationRecorder
 
-MODEL_DIR = r"C:\Users\aacer\Desktop\MATS\model"
-LENS_PATH = r"C:\Users\aacer\Desktop\MATS\lens_weights\qwen3-1.7b\jlens\Salesforce-wikitext\Qwen3-1.7B_jacobian_lens.pt"
+MODEL_DIR = r"C:\Users\aacer\Documents\J-Space\model"
+LENS_PATH = r"C:\Users\aacer\Documents\J-Space\lens_weights\qwen3-1.7b\jlens\Salesforce-wikitext\Qwen3-1.7B_jacobian_lens.pt"
 
 model = transformers.AutoModelForCausalLM.from_pretrained(
     MODEL_DIR, dtype=torch.float32, device_map="cpu", local_files_only=True)

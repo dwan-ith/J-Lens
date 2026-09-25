@@ -1,35 +1,77 @@
-# Jacobian Lens (J-Lens): Causal Divergence and Representation Tracking
+# Jacobian Lens (J-Lens): Safety-Relevant Interpretability
 
-This repository contains the rigorous evaluation testbed for the **Jacobian Lens (J-Lens)** methodology, specifically investigating the causal divergence between globally-averaged Jacobian representations and instantaneous local Jacobians on the `Qwen3-1.7B` architecture.
+Research framework for validating J-Lens as a reliable readout tool for AI safety applications. Investigates whether J-Lens provides genuine windows into model computation versus statistical artifacts, with direct applications to deception detection and alignment monitoring.
 
-## Overview
+## Research Program
 
-The core hypothesis underpinning this framework is whether global Jacobian approximations—learned over broad offline distributions—can accurately track and manipulate the latent space semantics computed dynamically during causal forward passes. By applying targeted interventions, this codebase mathematically and empirically dissects the validity of interpreting Language Models via singular global Jacobians.
+### Phase 1: Safety-Specific Readout Validation (`safety_gap.py`)
+Tests whether J-Lens readout fidelity degrades on safety-relevant inputs compared to in-distribution text.
 
-### Core Modules
+- Safety categories: deception, eval awareness, sycophancy, refusal
+- Adversarial categories: escalation, roleplay, obfuscation
+- Compares web-text lens vs safety-distribution lens
+- Quantifies the "safety gap" in readout reliability
 
-* **`experiment.py`**
-  The central analytical driver. Formally assesses *Local vs. Global Divergence*, quantifying the exact misalignment between the J-Lens linear projection matrix and the actual dynamically computed derivatives at the transformer residuum.
+### Phase 2: Deception Detection (`deception_detector.py`)
+Tracks J-Lens readout trajectories across all layers to detect deceptive alignment.
 
-* **`causal_patching_24.py` & `causal_patching.py`**
-  Implements activation-level interventions at specific injection points (primarily $L_{14}$). It performs continuous interpolations over an $\alpha$-vector space `[0.0, 0.1, 0.2, 0.3, 0.5, 0.7, 1.0]`, substituting cleanly ablated states to trace non-linear propagation of semantics through subsequent layers.
+- Trajectory metrics: divergence area, mid-late gap, peak layer, variance
+- Classification: normal / uncertain / suspicious
+- Tests on structured deception scenarios (escalation, roleplay, obfuscation)
 
-* **`random_direction_control.py`**
-  A critical falsification mechanism. By intervening using uniformly sampled random directions restricted to the exact same $L_2$ norm as the principal J-Lens projection vectors, this ensures that any observed causal changes in decoding probabilities are not mere artifacts of vector magnitude disruption, thereby securing the rigor of the "causal headline."
+### Phase 3: Cross-Architecture Scaling (`cross_arch.py`)
+Tests whether the proximity artifact (advantage peaks mid-stack, vanishes at output) is architecture-general.
 
-* **`compute_n7_corr.py` & `get_all_ll_raw.py`**
-  Extracts the raw $LL$ (Logit Lens) baseline directly from intermediate residual streams (baseline correlation $r \approx 0.191$). These baseline extraction routines establish the grounding against which the Jacobian Lens's accuracy improvements are benchmarked.
+- Models: Qwen3-1.7B, Qwen3-8B, Llama-3.2-3B
+- Cross-model lens transfer evaluation
 
-* **`generate_plots_from_data.py` & `plot_patching_final.py`**
-  Responsible for translating complex higher-dimensional divergence matrices, patching sweeps, and categorical metrics into rigorous visual telemetry (e.g., Figures 1-5).
+## Key Findings (Qwen3-1.7B)
 
-## Methodology & Execution
+| Finding | Status |
+|---------|--------|
+| J-Lens advantage peaks at L14 | **Survives** |
+| Causal patching (J-Lens direction) | Overturned by random-direction control |
+| Norm distortion (Qwen3 RMSNorm) | Architecture-specific bug |
+| Readout fidelity != causal privilege | Core insight |
 
-1. **Environment Definition**: The evaluations operate inherently against the `Qwen3-1.7B` structure, assuming access to standard `transformers` APIs and the bespoke `jlens` fitting framework.
-2. **Setup**: Necessary lens weights and models (such as `Qwen3-1.7B_jacobian_lens.pt`) should be provisioned into the `model/` and `lens_weights/` directories respectively (kept completely outside Git version control via structural `.gitignore` enforcement).
-3. **Execution**: To reproduce core analytical results, execute the causal patching scripts followed by standard correlative analysis checks.
-4. **Validation**: Rely on the random direction control as the baseline invariant. Valid interventions under J-Lens will significantly outpace random vectors bounded under identically constrained activation norms.
+**Critical distinction**: A direction can be a good *readout* of computation without being a good *handle* on it. J-Lens tells you what the model is thinking (readout), but moving along that direction doesn't uniquely influence what it thinks (no causal privilege).
 
-## Context
+## Files
 
-This rigorous evaluation infrastructure is designed specifically to ensure that the representational readouts derived from intermediate network spaces are not hallucinated statistical correlates, but true, causally potent vectors orchestrating next-token generation.
+### Safety Research
+- `safety_prompts.py` — Safety-focused prompt datasets (deception, eval awareness, sycophancy, refusal, adversarial)
+- `safety_gap.py` — Phase 1: Safety readout validation
+- `deception_detector.py` — Phase 2: Deception detection via trajectory analysis
+- `cross_arch.py` — Phase 3: Cross-architecture scaling
+- `run_full_study.py` — Unified runner for all phases
+
+### Original Evaluation
+- `experiment.py` — Local vs global divergence experiment
+- `causal_patching.py` & `causal_patching_24.py` — Causal patching with alpha sweep
+- `random_direction_control.py` — Random-direction control (norm-matched)
+- `prompts.py` — Original 7-category prompt set
+
+### J-Lens Library
+- `jacobian-lens/` — Anthropic's J-Lens implementation (Apache 2.0)
+
+## Setup
+
+1. Place Qwen3-1.7B model in `model/`
+2. Place fitted J-Lens in `lens_weights/qwen3-1.7b/jlens/Salesforce-wikitext/`
+3. Install dependencies: `pip install torch transformers matplotlib seaborn numpy`
+
+## Running
+
+```bash
+# Full study (all phases)
+python run_full_study.py all
+
+# Individual phases
+python run_full_study.py 1  # Safety gap
+python run_full_study.py 2  # Deception detection
+python run_full_study.py 3  # Cross-architecture
+```
+
+## Results
+
+Results are saved to `results/phase1_safety_gap/`, `results/phase2_deception/`, and `results/phase3_cross_arch/`.

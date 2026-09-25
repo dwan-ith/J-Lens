@@ -5,10 +5,10 @@ warnings.filterwarnings("ignore")
 import torch
 import transformers
 
-sys.path.insert(0, r"C:\Users\aacer\Desktop\MATS\jacobian-lens")
+sys.path.insert(0, r"C:\Users\aacer\Documents\J-Space\jacobian-lens")
 from jlens.hooks import ActivationRecorder
 
-MODEL_DIR = r"C:\Users\aacer\Desktop\MATS\model"
+MODEL_DIR = r"C:\Users\aacer\Documents\J-Space\model"
 
 model = transformers.AutoModelForCausalLM.from_pretrained(
     MODEL_DIR, dtype=torch.float32, device_map="cpu", local_files_only=True)

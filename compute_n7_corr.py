@@ -7,7 +7,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-RESULTS_DIR = r"C:\Users\aacer\Desktop\MATS\results"
+RESULTS_DIR = r"C:\Users\aacer\Documents\J-Space\results"
 
 key_layers = [4, 9, 14, 19, 24, 26]
 

@@ -8,7 +8,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import json
 
-RESULTS_DIR = r"C:\Users\aacer\Desktop\MATS\results"
+RESULTS_DIR = r"C:\Users\aacer\Documents\J-Space\results"
 
 with open(os.path.join(RESULTS_DIR, "patching_24.json")) as f:
     jl_results = json.load(f)

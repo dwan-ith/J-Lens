@@ -26,15 +26,15 @@ import seaborn as sns
 from pathlib import Path
 from collections import defaultdict
 
-sys.path.insert(0, r"C:\Users\aacer\Desktop\MATS\jacobian-lens")
+sys.path.insert(0, r"C:\Users\aacer\Documents\J-Space\jacobian-lens")
 import jlens
 from jlens.hooks import ActivationRecorder
 from prompts import ALL_CATEGORIES
 
 # ─── Config ──────────────────────────────────────────────────────────────────
-MODEL_DIR = r"C:\Users\aacer\Desktop\MATS\model"
-LENS_PATH = r"C:\Users\aacer\Desktop\MATS\lens_weights\qwen3-1.7b\jlens\Salesforce-wikitext\Qwen3-1.7B_jacobian_lens.pt"
-OUTPUT_DIR = Path(r"C:\Users\aacer\Desktop\MATS\results")
+MODEL_DIR = r"C:\Users\aacer\Documents\J-Space\model"
+LENS_PATH = r"C:\Users\aacer\Documents\J-Space\lens_weights\qwen3-1.7b\jlens\Salesforce-wikitext\Qwen3-1.7B_jacobian_lens.pt"
+OUTPUT_DIR = Path(r"C:\Users\aacer\Documents\J-Space\results")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 N_PROMPTS_PER_CAT = 5
