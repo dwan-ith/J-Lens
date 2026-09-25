@@ -4,3 +4,12 @@ lens_weights/
 *.pt
 *.log
 __pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Grant proposals and internal documentation (public repo keeps README.md only)
+GRANT_PROPOSAL.md
+GRANT_SUBMISSION.md
+THINKING_MACHINES_GRANT.md
+results/*.md
+results/*.txt
